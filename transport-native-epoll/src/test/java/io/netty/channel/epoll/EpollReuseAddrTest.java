@@ -23,7 +23,6 @@ import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.testsuite.util.TestUtils;
 import io.netty.util.NetUtil;
 import io.netty.util.ReferenceCountUtil;
 import io.netty.util.ResourceLeakDetector;
@@ -173,7 +172,7 @@ public class EpollReuseAddrTest {
         bootstrap.group(EpollSocketTestPermutation.EPOLL_BOSS_GROUP, EpollSocketTestPermutation.EPOLL_WORKER_GROUP);
         bootstrap.channel(EpollServerSocketChannel.class);
         bootstrap.childHandler(new DummyHandler());
-        InetSocketAddress address = new InetSocketAddress(NetUtil.LOCALHOST, TestUtils.getFreePort());
+        InetSocketAddress address = new InetSocketAddress(NetUtil.LOCALHOST, 0);
         bootstrap.localAddress(address);
         return bootstrap;
     }
@@ -182,7 +181,7 @@ public class EpollReuseAddrTest {
         Bootstrap bootstrap = new Bootstrap();
         bootstrap.group(EpollSocketTestPermutation.EPOLL_WORKER_GROUP);
         bootstrap.channel(EpollDatagramChannel.class);
-        InetSocketAddress address = new InetSocketAddress(NetUtil.LOCALHOST, TestUtils.getFreePort());
+        InetSocketAddress address = new InetSocketAddress(NetUtil.LOCALHOST, 0);
         bootstrap.localAddress(address);
         return bootstrap;
     }
